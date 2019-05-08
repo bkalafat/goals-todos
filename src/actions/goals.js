@@ -36,7 +36,7 @@ export function handleDeleteGoal(goal) {
 
     return API.deleteGoal(goal.id)
       .catch(() => {
-        this.props.store.dispatch(addGoalAction(goal))
+        this.props.store.dispatch(addGoal(goal))
         alert("An error occured. Try again.")
       })
   }
