@@ -8,26 +8,24 @@ import {
 
 class App extends React.Component {
   componentDidMount () {
-    const { store } = this.props
+    const { dispatch } = this.props
 
-    store.dispatch(handleInitialData())
-    store.subscribe(() => this.forceUpdate())
+    dispatch(handleInitialData())
   }
   render() {
-    const { store } = this.props
-    const { todos, goals, loading } = store.getState()
-    if (loading === true) {
+    if (this.props.loading === true) {
       return <h3>Loading</h3>
     }
+
     return (
       <div>
-        <ConnectedTodos todos={todos} store={this.props.store} />
-        <ConnectedGoals goals={goals} store={this.props.store} />
+        <ConnectedTodos />
+        <ConnectedGoals />
       </div>
     )
   }
 }
-export default connect((
-  state) => ({
-    loading: state.loading
-  }))(App)
+
+export default connect((state) => ({
+  loading: state.loading
+}))(App)
